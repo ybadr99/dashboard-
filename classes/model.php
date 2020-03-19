@@ -21,9 +21,9 @@ include "db.php";
 
 
         
-        protected function getWhere($id)
+        public function getWhere($id)
         {   
-            $sql = "SELECT * FROM posts WHERE id = ?";
+            $sql = "SELECT * FROM `$this->table` WHERE id = ?";
             $stmt = $this->connect()->prepare($sql);
             $stmt->execute([$id]);
             
@@ -43,25 +43,31 @@ include "db.php";
 
        public function Delete($id)
        {
-           $sql = "DELETE FROM posts WHERE id = ?";
+           $sql = "DELETE FROM `$this->table` WHERE id = ?";
            $stmt = $this->connect()->prepare($sql);
            $stmt->execute([$id]);
        }
-    
-       public function Update($title, $body, $author, $id)
-       {
-           $sql = "UPDATE posts SET title = ? , body = ? , author = ? WHERE id = ?";
+       
+       protected function setUsers($fname , $lname , $email , $pass)
+       {   
+           $sql = "INSERT INTO `$this->table`(fname, lname , email , password ) VALUES(? , ? , ? , ?)";
            $stmt = $this->connect()->prepare($sql);
-           $stmt->execute([$title , $body , $author , $id]);
-       }
-
+           $stmt->execute([$fname , $lname , $email , $pass]);
+           
+           
+        }
+        
+           public function Update($title, $body, $author, $id)
+           {
+               $sql = "UPDATE posts SET title = ? , body = ? , author = ? WHERE id = ?";
+               $stmt = $this->connect()->prepare($sql);
+               $stmt->execute([$title , $body , $author , $id]);
+           }
     
     }
 
     
-    // $ob = new Model;
-    // $ob->Update('Update post' , 'this is update' , 'joe' , 17);
-
+    
 
 
 ?>

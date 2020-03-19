@@ -47,8 +47,8 @@
                         <!-- <td></td> -->
                         <td><?php echo $post->created_at;  ?></td>
                         <td>
-                          <a class="btn btn-default"  href="#"  data-toggle="modal" data-target="#editpost">Edit</a> 
-                          <a class="btn btn-danger"  href="process.php?delete=<?php echo $post->id; ?>">Delete</a>
+                          <a class="btn btn-default"  href="edit.php?edit=<?php echo $post->id; ?>">Edit</a> 
+                          <a class="btn btn-danger"  href="process.php?deletePost=<?php echo $post->id; ?>">Delete</a>
                         </td>
                       </tr>
                   <?php  endforeach;  ?>

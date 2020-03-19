@@ -1,23 +1,38 @@
 <?php
   include "header.php";
+  include "include/autoloader.php";
+
+  if(isset($_GET['edit']))
+  {
+    $id = $_GET['edit'];
+    $obj = new Posts();
+    $posts = $obj->getWhere($id);
+    
+  }
+
 ?>
+
+
+  <?php foreach ($posts as $post) : ?>
+
           <div class="col-md-9">
             <!-- Website Overview -->
             <div class="panel panel-default">
               <div class="panel-heading main-color-bg">
-                <h3 class="panel-title">Edit Page</h3>
+                <h3 class="panel-title">Edit Post</h3>
               </div>
               <div class="panel-body">
-                <form>
+                <form action="process.php" method = "POST">
+                  <input type="hidden" name="id" value="<?php echo $post->id; ?>">
                   <div class="form-group">
-                    <label>Page Title</label>
-                    <input type="text" class="form-control" placeholder="Page Title" value="About">
+                    <label>Post Title</label>
+                    <input name = "title" type="text" class="form-control" placeholder="Post Title" value="<?php echo $post->title; ?>">
                   </div>
                   <div class="form-group">
-                    <label>Page Body</label>
-                    <textarea name="editor1" class="form-control" placeholder="Page Body">
-                      Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
-                    </textarea>
+                    <label>Post Body</label>
+                    <!-- <textarea name="editor1" class="form-control"  value="<?php echo $post->body; ?>" >
+                    </textarea> -->
+                    <input name = "body" type="text" class="form-control" value="<?php echo $post->body; ?>">
                   </div>
                   <div class="checkbox">
                     <label>
@@ -25,14 +40,10 @@
                     </label>
                   </div>
                   <div class="form-group">
-                    <label>Meta Tags</label>
-                    <input type="text" class="form-control" placeholder="Add Some Tags..." value="tag1, tag2">
+                    <label>Post Author</label>
+                    <input name = "author" type="text" class="form-control" placeholder="Post Author" value="<?php echo $post->author; ?>">
                   </div>
-                  <div class="form-group">
-                    <label>Meta Description</label>
-                    <input type="text" class="form-control" placeholder="Add Meta Description..." value="  Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et ">
-                  </div>
-                  <input type="submit" class="btn btn-default" value="Submit">
+                  <input type="submit" class="btn btn-default" name="editPost">
                 </form>
               </div>
               </div>
@@ -41,7 +52,7 @@
         </div>
       </div>
     </section>
-
+  <?php endforeach;  ?>
 <?php
   include "footer.php";
 ?>

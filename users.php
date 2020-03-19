@@ -37,7 +37,7 @@
                         <td><?php echo $user->lname; ?></td>
                         <td><?php echo $user->email; ?></td>
                         <td><?php echo $user->created_at; ?></td>
-                        <td><a class="btn btn-default" href="edit.html">Edit</a> <a class="btn btn-danger" href="#">Delete</a></td>
+                        <td><a class="btn btn-default" href="#">Edit</a> <a class="btn btn-danger" href="process.php?deleteUser=<?php echo $user->id; ?>">Delete</a></td>
                       </tr>
                     <?php endforeach; ?>
 
@@ -57,7 +57,7 @@
   <div class="modal fade" id="addUser" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
   <div class="modal-dialog" role="document">
     <div class="modal-content">
-      <form>
+      <form action ="process.php" method="POST"> 
       <div class="modal-header">
         <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
         <h4 class="modal-title" id="myModalLabel">Add User</h4>
@@ -65,24 +65,24 @@
       <div class="modal-body">
         <div class="form-group">
           <label>first name</label>
-          <input type="text" class="form-control" placeholder="Enter first name">
+          <input name="fname" type="text" class="form-control" placeholder="Enter first name">
         </div>
         <div class="form-group">
           <label>last name</label>
-          <input name="text" class="form-control" placeholder="Enter last name"></input>
+          <input name="lname" class="form-control" placeholder="Enter last name"></input>
         </div>
         <div class="form-group">
           <label>Email</label>
-          <input name="text" class="form-control" placeholder="Enter Email"></input>
+          <input name="email" class="form-control" placeholder="Enter Email"></input>
         </div>
         <div class="form-group">
           <label>Password</label>
-          <input name="text" class="form-control" placeholder="Enter Password"></input>
+          <input type="password" name="password" class="form-control" placeholder="Enter Password"></input>
         </div>
       </div>
       <div class="modal-footer">
         <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-        <button type="submit" class="btn btn-primary">Save changes</button>
+        <button name="addUser" type="submit" class="btn btn-primary">Save changes</button>
       </div>
     </form>
     </div>

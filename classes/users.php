@@ -13,6 +13,10 @@ class Users extends Model{
         return $result;    
     }
 
+    public function creatUser($fname , $lname , $email , $pass)
+    {
+        return $this->setUsers($fname , $lname , $email , $pass);
+    }
     
 
 }
